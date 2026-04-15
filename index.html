@@ -13,7 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="assets/Logo.png" alt="Excellence Web Services" class="splash-logo">
+            <div class="splash-loader"></div>
+        </div>
+    </div>
 
     <nav class="glass-nav">
       <!-- Sticky Navigation -->
@@ -40,131 +46,139 @@
     </nav>
 
     <header id="home" class="hero-section">
+        <canvas id="hero-canvas"></canvas>
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="badge">Next Generation Solutions</div>
-                <h1 class="reveal-text">Excellence Web Services</h1>
-                <p class="hero-subtitle">Empowering your business with cutting-edge digital solutions, from web design
-                    to targeted SEO.</p>
-                <div class="hero-actions">
-                    <a href="#services" class="primary-btn pulse-glow">Explore Services</a>
+            <div class="hero-content full-width text-center">
+                <div class="badge fade-up">Designing the Digital Ecosystem</div>
+                <h1 class="reveal-text massive-text">Redefining Excellence.</h1>
+                <p class="hero-subtitle centered-subtitle">We partner with visionaries to build high-performance digital solutions that dominate the market.</p>
+                <div class="hero-actions centered-actions">
+                    <a href="#services" class="primary-btn pulse-glow lg-btn">Start Your Project</a>
+                    <a href="#about" class="secondary-nav-btn desktop-only">Learn More <span>↓</span></a>
                 </div>
-            </div>
-            <div class="hero-image-wrapper slide-in-right">
-                <!-- Using dynamically generated premium AI graphic matching the gold theme -->
-                <img src="assets/Logo.png" alt="Futuristic Tech Web Design" class="floating-img rounded-img hero-img">
             </div>
         </div>
         <div class="hero-visuals">
             <div class="glow-orb main-orb"></div>
             <div class="glow-orb secondary-orb"></div>
+            <div class="glow-orb accent-orb"></div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll to Explore</span>
         </div>
     </header>
 
     <main id="services">
-        <section class="info-container">
+        <section class="info-container section-relative">
+            <div class="tech-mesh"></div>
             <div class="section-header">
                 <h2 class="section-title">Our Professional Services</h2>
-                <p class="section-desc">Tailored strategies to elevate your online presence.</p>
+                <p class="section-desc">Tailored strategies powered by the latest digital infrastructure.</p>
             </div>
 
             <div class="services-grid" id="services-grid">
                 <!-- Service Cards -->
-                <div class="service-card glass-panel" onclick="openModal('web')">
+                <div class="service-card futuristic-card-v2" onclick="openModal('web')">
                     <div class="card-icon"><img src="assets/service_web.png" class="service-img" alt="Web Design"></div>
-                    <h3>Website Design & Development</h3>
-                    <p>Custom responsive website design and dynamic web development services tailored to accelerate your
-                        business scaling.</p>
-                    <a href="javascript:void(0)" class="learn-more">Learn More <span>→</span></a>
+                    <h3>Intelligent Web Design</h3>
+                    <p>High-performance, adaptive platforms engineered to scale your business at light speed.</p>
+                    <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
-                <div class="service-card glass-panel" onclick="openModal('seo')">
+                <div class="service-card futuristic-card-v2" onclick="openModal('seo')">
                     <div class="card-icon"><img src="assets/service_seo.png" class="service-img" alt="SEO Services">
                     </div>
-                    <h3>SEO Services</h3>
-                    <p>Dominant local SEO and data-driven search engine optimization solutions to help you rank higher
-                        and reach more customers.</p>
-                    <a href="javascript:void(0)" class="learn-more">Learn More <span>→</span></a>
+                    <h3>Growth Optimization</h3>
+                    <p>Advanced algorithmic SEO and data-backed strategies to ensure you stay ahead of the competition.</p>
+                    <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
-                <div class="service-card glass-panel" onclick="openModal('marketing')">
+                <div class="service-card futuristic-card-v2" onclick="openModal('marketing')">
                     <div class="card-icon"><img src="assets/service_marketing.png" class="service-img"
                             alt="Digital Marketing"></div>
-                    <h3>Digital Marketing</h3>
-                    <p>Strategic social media marketing and holistic online advertising services to boost brand presence
-                        across platforms.</p>
-                    <a href="javascript:void(0)" class="learn-more">Learn More <span>→</span></a>
+                    <h3>Strategic Marketing</h3>
+                    <p>Omni-channel campaigns designed to build authority and drive precision-targeted traffic.</p>
+                    <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
-                <div class="service-card glass-panel" onclick="openModal('ecommerce')">
+                <div class="service-card futuristic-card-v2" onclick="openModal('ecommerce')">
                     <div class="card-icon"><img src="assets/service_ecommerce.png" class="service-img"
                             alt="E-Commerce Development"></div>
-                    <h3>E-commerce Development</h3>
-                    <p>Advanced online store development and easily scalable e-commerce solutions to offer an optimized,
-                        seamless shopping experience.</p>
-                    <a href="javascript:void(0)" class="learn-more">Learn More <span>→</span></a>
+                    <h3>Predictive E-commerce</h3>
+                    <p>Seamless shopping experiences optimized for maximum conversion and future-proof scalability.</p>
+                    <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Projects Section -->
-    <section id="projects" class="info-container">
+    <!-- Projects Section (3D Orbital Wheel) -->
+    <section id="projects" class="info-container wheel-section">
         <div class="section-header">
-            <h2 class="section-title">Our Recent Work</h2>
-            <p class="section-desc">Explore some of the premium digital experiences we've engineered.</p>
+            <h2 class="section-title">The Digital Galaxy</h2>
+            <p class="section-desc">Witness the digital ecosystems we've co-curated with our partners.</p>
         </div>
-        <div class="projects-grid">
-            <div class="project-card glass-panel">
-                <div class="project-img-wrapper">
-                    <img src="assets/Aashiya Greens.png" alt="Aashiyana Greens" class="project-img">
-                    <span class="project-tag">Real Estate</span>
+        
+        <div class="wheel-container">
+            <div class="wheel-inner">
+                <div class="project-card futuristic-card-v2 wheel-card">
+                    <div class="project-img-wrapper">
+                        <img src="assets/Aashiya Greens.png" alt="Aashiyana Greens" class="project-img">
+                        <span class="project-tag">Modern Living</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Aashiyana Greens</h3>
+                        <p>We partnered to build a visionary property platform, redefining luxury real estate discoverability.</p>
+                        <a href="https://aashiyanagreens.com/" target="_blank" rel="noopener noreferrer" class="project-link">Explore the Vision <span>→</span></a>
+                    </div>
                 </div>
-                <div class="project-info">
-                    <h3>Aashiyana Greens</h3>
-                    <p>Premium real estate and property platform showcasing modern living spaces.</p>
-                    <a href="https://aashiyanagreens.com/" target="_blank" rel="noopener noreferrer"
-                        class="project-link">View Live Site <span>→</span></a>
+
+                <div class="project-card futuristic-card-v2 wheel-card">
+                    <div class="project-img-wrapper">
+                        <img src="assets/Capital store.png" alt="Capital Store" class="project-img">
+                        <span class="project-tag">Digital Retail</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Capital Store</h3>
+                        <p>A collaborative journey to create a frictionless shopping experience for the modern consumer.</p>
+                        <a href="https://www.capitalstorecs.com/" target="_blank" rel="noopener noreferrer" class="project-link">Explore the Vision <span>→</span></a>
+                    </div>
+                </div>
+
+                <div class="project-card futuristic-card-v2 wheel-card">
+                    <div class="project-img-wrapper">
+                        <img src="assets/Divya Agro Traders.png" alt="Divya Agro Traders" class="project-img">
+                        <span class="project-tag">Agri-Future</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Divya Agro Traders</h3>
+                        <p>Bridging the gap between agriculture and technology with a high-performance B2B portal.</p>
+                        <a href="https://www.divyaagrotraders.com/" target="_blank" rel="noopener noreferrer" class="project-link">Explore the Vision <span>→</span></a>
+                    </div>
+                </div>
+
+                <div class="project-card futuristic-card-v2 wheel-card">
+                    <div class="project-img-wrapper">
+                        <img src="assets/Wow kids Worksheets.png" alt="Wow Kids Worksheets" class="project-img">
+                        <span class="project-tag">Interactive Learning</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Wow Kids Worksheets</h3>
+                        <p>Co-designing an engaging digital platform to revolutionize early childhood education.</p>
+                        <a href="https://www.wowkidsworksheets.in/" target="_blank" rel="noopener noreferrer" class="project-link">Explore the Vision <span>→</span></a>
+                    </div>
                 </div>
             </div>
-
-            <div class="project-card glass-panel">
-                <div class="project-img-wrapper">
-                    <img src="assets/Capital store.png" alt="Capital Store" class="project-img">
-                    <span class="project-tag">E-Commerce</span>
+            
+            <div class="wheel-nav">
+                <button id="wheel-prev" class="wheel-btn">←</button>
+                <div class="wheel-progress">
+                    <div id="wheel-bar" class="wheel-bar"></div>
                 </div>
-                <div class="project-info">
-                    <h3>Capital Store</h3>
-                    <p>A comprehensive retail e-commerce platform offering seamless digital shopping.</p>
-                    <a href="https://www.capitalstorecs.com/" target="_blank" rel="noopener noreferrer"
-                        class="project-link">View Live Site <span>→</span></a>
-                </div>
-            </div>
-
-            <div class="project-card glass-panel">
-                <div class="project-img-wrapper">
-                    <img src="assets/Divya Agro Traders.png" alt="Divya Agro Traders" class="project-img">
-                    <span class="project-tag">Agri-Tech</span>
-                </div>
-                <div class="project-info">
-                    <h3>Divya Agro Traders</h3>
-                    <p>A B2B agricultural trading portal prioritizing robust supply chain connectivity.</p>
-                    <a href="https://www.divyaagrotraders.com/" target="_blank" rel="noopener noreferrer"
-                        class="project-link">View Live Site <span>→</span></a>
-                </div>
-            </div>
-
-            <div class="project-card glass-panel">
-                <div class="project-img-wrapper">
-                    <img src="assets/Wow kids Worksheets.png" alt="Wow Kids Worksheets" class="project-img">
-                    <span class="project-tag">Ed-Tech</span>
-                </div>
-                <div class="project-info">
-                    <h3>Wow Kids Worksheets</h3>
-                    <p>Engaging online educational portal distributing interactive learning materials.</p>
-                    <a href="https://www.wowkidsworksheets.in/" target="_blank" rel="noopener noreferrer"
-                        class="project-link">View Live Site <span>→</span></a>
-                </div>
+                <button id="wheel-next" class="wheel-btn">→</button>
             </div>
         </div>
     </section>
@@ -173,14 +187,11 @@
     <section id="about" class="info-container split-section">
         <div class="split-content slide-in-left">
             <div class="section-header align-left">
-                <h2 class="section-title">Elevating Brands Online</h2>
-                <p class="section-desc">A leading web design and digital marketing agency in Ludhiana.</p>
+                <h2 class="section-title">We're More Than a Service</h2>
+                <p class="section-desc">We're your dedicated team of digital growth experts in Ludhiana.</p>
             </div>
             <div class="about-content glass-panel align-left">
-                <p>At <strong>Excellence Web Services</strong>, we specialize in custom website development, dominant
-                    SEO mechanics, immersive e-commerce solutions, and full-spectrum digital marketing strategies for
-                    growing businesses. Under the guidance of founder Suryansh Wadhwa, our dedicated team is committed
-                    to generating measurable results and establishing a robust online presence for your brand.</p>
+                <p>At <strong>Excellence Web Services</strong>, we believe that every business has a unique story worth telling. Under the vision of Suryansh Wadhwa, our team works closely with you to craft immersive digital experiences that don't just look good—they get results. Whether it's SEO, E-commerce, or custom development, we're here to help you scale efficiently and authentically.</p>
             </div>
         </div>
         <div class="split-image-wrapper slide-in-right">
@@ -200,35 +211,31 @@
                 style="bottom: -50px; right: -50px; width: 200px; height: 200px; opacity: 0.15; filter: blur(40px);">
             </div>
 
-            <h2 class="section-title" style="margin-bottom: 20px; position: relative; z-index: 2;">Our Promise to You
+            <h2 class="section-title" style="margin-bottom: 20px; position: relative; z-index: 2;">Our Relationship with You
             </h2>
-            <p class="section-desc" style="margin: 0 auto 50px; position: relative; z-index: 2;">We are committed to
-                delivering excellence. Here is what you can always expect from our dedicated team.</p>
+            <p class="section-desc" style="margin: 0 auto 50px; position: relative; z-index: 2;">We're not just a vendor; we're an extension of your team. Here's what you can always count on from us.</p>
 
             <div class="promise-grid" style="position: relative; z-index: 2;">
                 <div class="promise-item futuristic-card">
                     <div class="promise-icon-wrapper">
-                        <div class="promise-icon">🛡️</div>
+                        <div class="promise-icon">🤝</div>
                     </div>
-                    <h4>Uncompromising Quality</h4>
-                    <p>We do not settle for average. Every line of code, UI component, and SEO strategy is engineered to
-                        absolute perfection.</p>
+                    <h4>Personalized Attention</h4>
+                    <p>We take the time to deeply understand your business. No formulaic solutions here—just strategies tailored to your specific goals.</p>
                 </div>
                 <div class="promise-item futuristic-card">
                     <div class="promise-icon-wrapper">
-                        <div class="promise-icon">⏱️</div>
+                        <div class="promise-icon">⚡</div>
                     </div>
-                    <h4>Synchronized Delivery</h4>
-                    <p>Your time is extremely valuable. We stick to our deadlines rigorously to ensure your business
-                        roadmap launches securely on schedule.</p>
+                    <h4>Fast & Fair Results</h4>
+                    <p>Just like our philosophy, we work quickly without cutting corners. You get fair pricing and high-quality work, every single time.</p>
                 </div>
                 <div class="promise-item futuristic-card">
                     <div class="promise-icon-wrapper">
-                        <div class="promise-icon">🌐</div>
+                        <div class="promise-icon">💎</div>
                     </div>
-                    <h4>Transparent Network</h4>
-                    <p>No hidden fees or confusing jargon. We maintain 100% transparency and provide continuous data
-                        reports throughout our entire relationship.</p>
+                    <h4>Absolute Excellence</h4>
+                    <p>We're called Excellence for a reason. We don't stop until every pixel is perfect and your brand is shining online as it should.</p>
                 </div>
             </div>
         </div>
