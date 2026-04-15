@@ -1,59 +1,46 @@
-// sticky-header-logic
-const handleNavScroll = () => {
-    const nav = document.querySelector('.glass-nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.style.padding = "10px 5%";
-            nav.style.background = "rgba(255, 255, 255, 0.95)"; // Light tint on scroll
-            nav.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.05)";
+/* ============================================================
+   THEME TOGGLE — Light ⇄ Dark
+   ============================================================ */
+(function () {
+    const html  = document.documentElement;
+    const saved = localStorage.getItem('ews-theme');
+
+    // Apply saved theme immediately (before DOM ready) to prevent flash
+    if (saved === 'dark') html.setAttribute('data-theme', 'dark');
+})();
+
+const initThemeToggle = () => {
+    const btn   = document.getElementById('theme-toggle');
+    const thumb = btn?.querySelector('.theme-toggle-thumb');
+    const html  = document.documentElement;
+
+    if (!btn || !thumb) return;
+
+    const isDark = () => html.getAttribute('data-theme') === 'dark';
+
+    const applyTheme = (dark) => {
+        if (dark) {
+            html.setAttribute('data-theme', 'dark');
+            thumb.textContent = '🌙';
+            thumb.title = 'Switch to Light Mode';
+            localStorage.setItem('ews-theme', 'dark');
         } else {
-            nav.style.padding = "20px 5%";
-            nav.style.background = "rgba(255, 255, 255, 0.7)";
-            nav.style.boxShadow = "none";
+            html.removeAttribute('data-theme');
+            thumb.textContent = '☀️';
+            thumb.title = 'Switch to Dark Mode';
+            localStorage.setItem('ews-theme', 'light');
         }
-    });
+    };
+
+    // Set initial icon based on current theme
+    applyTheme(isDark());
+
+    btn.addEventListener('click', () => applyTheme(!isDark()));
 };
 
-// Smooth scroll for professional UX
-const smoothScroll = () => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-};
+document.addEventListener('DOMContentLoaded', initThemeToggle);
 
-document.addEventListener('DOMContentLoaded', () => {
-    handleNavScroll();
-    smoothScroll();
-    
-    // Mobile Hamburger Logic
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    
-    if(hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('nav-active');
-            hamburger.classList.toggle('toggle');
-        });
 
-        // Close menu when a link is clicked
-        const navAnchorLinks = navLinks.querySelectorAll('a');
-        navAnchorLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if(navLinks.classList.contains('nav-active')) {
-                    navLinks.classList.remove('nav-active');
-                    hamburger.classList.remove('toggle');
-                }
-            });
-        });
-    }
-});
-
-// Modal Logic & Content Engine
 const serviceDetails = {
     web: {
         title: "Website Design & Development",
@@ -80,28 +67,29 @@ const serviceDetails = {
 const openModal = (serviceId) => {
     const modal = document.getElementById('serviceModal');
     const data = serviceDetails[serviceId];
-    
-    if(data && modal) {
+    if (data && modal) {
         document.getElementById('modalIcon').innerHTML = data.icon;
         document.getElementById('modalTitle').innerText = data.title;
         document.getElementById('modalDesc').innerText = data.desc;
         modal.classList.add('open');
-        document.body.style.overflow = 'hidden'; // prevent background scroll
+        document.body.style.overflow = 'hidden';
     }
 };
 
 const closeModal = () => {
     const modal = document.getElementById('serviceModal');
-    if(modal) {
+    if (modal) {
         modal.classList.remove('open');
         document.body.style.overflow = '';
     }
 };
 
-// Close modal when clicking on the frosted glass background
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('serviceModal');
-    if(e.target === modal) {
-        closeModal();
-    }
+    if (e.target === modal) closeModal();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
 });
