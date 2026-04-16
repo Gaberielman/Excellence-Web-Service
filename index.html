@@ -64,19 +64,85 @@
     ════════════════════════════════════════════ -->
     <header id="home" class="hero-section">
         <div class="hero-visuals">
-            <div class="glow-orb main-orb"></div>
-            <div class="glow-orb secondary-orb"></div>
+            <div class="bg-typography scroll-parallax" data-speed="0.25">EXCELLENCE</div>
+            <div class="bg-typography outline-text scroll-parallax" data-speed="-0.18">DIGITAL</div>
+            
+            <div class="glow-orb main-orb scroll-parallax" data-speed="0.1"></div>
+            <div class="glow-orb secondary-orb scroll-parallax" data-speed="0.15"></div>
             <div class="glow-orb accent-orb"></div>
         </div>
 
-        <div class="hero-container">
-            <div class="hero-content full-width text-center active">
-                <div class="badge">Designing the Digital Ecosystem</div>
-                <h1 class="reveal-text massive-text">Redefining Excellence.</h1>
-                <p class="hero-subtitle centered-subtitle">We partner with visionaries to build high-performance digital solutions that dominate the market.</p>
-                <div class="hero-actions centered-actions">
-                    <a href="#services" class="primary-btn pulse-glow lg-btn">Start Your Project</a>
-                    <a href="#about" class="secondary-nav-btn desktop-only">Learn More <span>↓</span></a>
+        <div class="hero-container split-hero-container">
+            <div class="hero-content active fade-up">
+                <div class="badge">Pay After Service • Ludhiana's #1</div>
+                <h1 class="hero-title">Dominate The <br><span class="brand-highlight">Digital</span> Space.</h1>
+                <p class="hero-subtitle">Expert Web Design & SEO Services in Ludhiana & Pan India. We build high-performance digital ecosystems that dominate the market.</p>
+                
+                <div class="hero-actions">
+                    <a href="#services" class="primary-btn pulse-glow lg-btn">Accelerate Now <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-left:8px"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    <a href="#projects" class="secondary-nav-btn desktop-only">View Portfolio <span>↓</span></a>
+                </div>
+
+                <div class="hero-social-proof slide-in-left">
+                    <div class="avatar-group">
+                        <div class="avatar"><img src="assets/service_web.png" alt="Web"></div>
+                        <div class="avatar"><img src="assets/service_seo.png" alt="SEO"></div>
+                        <div class="avatar"><img src="assets/service_marketing.png" alt="Marketing"></div>
+                    </div>
+                    <div class="proof-text">
+                        <strong>150+</strong>
+                        <span>Businesses Scaled</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side Floating UI Cards -->
+            <div class="hero-3d-composition slide-in-right">
+                
+                <!-- MOUSE-TRACKING 3D AVATAR -->
+                <div class="avatar-3d-container" id="tilt-avatar-container">
+                    <img src="assets/3d_avatar.png" alt="3D Cyber Avatar coding with Logo" class="avatar-3d-img">
+                </div>
+
+                <div class="glass-float-card fc-1">
+                    <div class="fc-header">
+                        <div class="fc-icon pulse-icon">🚀</div>
+                        <div>
+                            <h4>Traffic Growth</h4>
+                            <p class="fc-sub">+128% <span>vs last month</span></p>
+                        </div>
+                    </div>
+                    <div class="fc-chart">
+                        <div class="fc-bar" style="height: 30%"></div>
+                        <div class="fc-bar" style="height: 45%"></div>
+                        <div class="fc-bar" style="height: 60%"></div>
+                        <div class="fc-bar" style="height: 100%; filter: drop-shadow(0 0 8px var(--accent-gold)); background: var(--accent-gold);"></div>
+                    </div>
+                </div>
+
+                <div class="glass-float-card fc-2">
+                    <div class="fc-header">
+                        <div class="fc-icon gold-ring">⚡</div>
+                        <div>
+                            <h4>Core Web Vitals</h4>
+                            <p class="fc-sub">99/100 <span>Performance</span></p>
+                        </div>
+                    </div>
+                    <div class="fc-progress-wrapper">
+                        <div class="fc-progress-track">
+                            <div class="fc-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-float-card fc-3">
+                    <div class="fc-header">
+                        <div class="fc-icon">💎</div>
+                        <div>
+                            <h4>SEO Rank</h4>
+                            <p class="fc-sub">Position #1 <span>Google</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,37 +167,37 @@
             <div class="services-grid">
                 <div class="service-card" onclick="openModal('web')">
                     <div class="card-icon">
-                        <img src="assets/service_web.png" class="service-img" alt="Web Design">
+                        <img src="assets/service_web.png" class="service-img" alt="Website Designing">
                     </div>
-                    <h3>Intelligent Web Design</h3>
-                    <p>High-performance, adaptive platforms engineered to scale your business at light speed.</p>
+                    <h3>Website Designing</h3>
+                    <p>Creating modern, responsive, and visually appealing designs that align with your brand identity.</p>
                     <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
                 <div class="service-card" onclick="openModal('seo')">
                     <div class="card-icon">
-                        <img src="assets/service_seo.png" class="service-img" alt="SEO Services">
+                        <img src="assets/service_seo.png" class="service-img" alt="SEO & SMM">
                     </div>
-                    <h3>Growth Optimization</h3>
-                    <p>Advanced algorithmic SEO and data-backed strategies to ensure you stay ahead of the competition.</p>
+                    <h3>SEO & Marketing</h3>
+                    <p>Enhanced Google visibility, social media marketing, and targeted ad campaigns to grow your brand.</p>
                     <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
-                <div class="service-card" onclick="openModal('marketing')">
+                <div class="service-card" onclick="openModal('webdev')">
                     <div class="card-icon">
-                        <img src="assets/service_marketing.png" class="service-img" alt="Digital Marketing">
+                        <img src="assets/service_marketing.png" class="service-img" alt="Web Development">
                     </div>
-                    <h3>Strategic Marketing</h3>
-                    <p>Omni-channel campaigns designed to build authority and drive precision-targeted traffic.</p>
+                    <h3>Web Development</h3>
+                    <p>Building secure, scalable, and high-performance websites using the latest clean-code technologies.</p>
                     <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
 
-                <div class="service-card" onclick="openModal('ecommerce')">
+                <div class="service-card" onclick="openModal('it')">
                     <div class="card-icon">
-                        <img src="assets/service_ecommerce.png" class="service-img" alt="E-Commerce Development">
+                        <img src="assets/service_ecommerce.png" class="service-img" alt="Technical IT Services">
                     </div>
-                    <h3>Predictive E-Commerce</h3>
-                    <p>Seamless shopping experiences optimized for maximum conversion and future-proof scalability.</p>
+                    <h3>IT Services</h3>
+                    <p>Troubleshooting, maintenance, system setup, and ongoing technical support for your infrastructure.</p>
                     <a href="javascript:void(0)" class="learn-more">Explore Solution <span>→</span></a>
                 </div>
             </div>
@@ -218,7 +284,7 @@
                 <p class="section-desc">We're your dedicated team of digital growth experts in Ludhiana.</p>
             </div>
             <div class="about-content glass-panel align-left">
-                <p>At <strong>Excellence Web Services</strong>, we believe that every business has a unique story worth telling. Under the vision of Suryansh Wadhwa, our team works closely with you to craft immersive digital experiences that don't just look good—they get results. Whether it's SEO, E-commerce, or custom development, we're here to help you scale efficiently and authentically.</p>
+                <p>At <strong>Excellence Web Services</strong>, we believe that every business has a unique story worth telling. Under the vision of Suryansh Wadhwa, our team works closely with visionaries in Ludhiana and across <strong>Pan India</strong> to craft immersive digital experiences. We specialize in high-performance Web Design, SEO, and IT solutions tailored to help you scale efficiently and authentically.</p>
             </div>
         </div>
         <div class="split-image-wrapper slide-in-right">
@@ -240,10 +306,10 @@
             <div class="promise-grid" style="position: relative; z-index: 2;">
                 <div class="promise-item futuristic-card">
                     <div class="promise-icon-wrapper">
-                        <div class="promise-icon">🤝</div>
+                        <div class="promise-icon">💰</div>
                     </div>
-                    <h4>Personalized Attention</h4>
-                    <p>We take the time to deeply understand your business. No formulaic solutions here—just strategies tailored to your specific goals.</p>
+                    <h4>Pay After Service</h4>
+                    <p>We believe in the quality of our work. That's why we offer a unique model where you pay only after we deliver the agreed-upon results for your business.</p>
                 </div>
                 <div class="promise-item futuristic-card">
                     <div class="promise-icon-wrapper">

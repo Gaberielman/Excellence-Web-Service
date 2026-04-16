@@ -43,24 +43,24 @@ document.addEventListener('DOMContentLoaded', initThemeToggle);
 
 const serviceDetails = {
     web: {
-        title: "Website Design & Development",
+        title: "Website Designing",
         icon: "<img src='assets/service_web.png' class='modal-service-img'>",
-        desc: "Our web development process focuses on creating stunning, fast, and responsive websites that serve as a powerful digital storefront. We use the latest technologies alongside meticulous UX/UI frameworks to ensure your site is secure, scalable, and fully optimized for explosive traffic conversions."
+        desc: "We focus on creating modern, responsive, and visually appealing designs that perfectly align with your brand identity. Our designs ensure fast-loading pages and seamless navigation across all devices, including mobile, tablets, and desktops."
     },
     seo: {
-        title: "Advanced SEO Services",
+        title: "SEO & Digital Marketing",
         icon: "<img src='assets/service_seo.png' class='modal-service-img'>",
-        desc: "Search Engine Optimization is the lifeblood of online visibility. We go beyond basic keyword insertion—our local SEO engineering encompasses deep technical audits, high-quality authoritative backlink building, rich content strategy, and precise Google My Business optimization to secure you at the top of search results."
+        desc: "Grow your online presence with our advanced SEO and social media marketing strategies. We specialize in Google local listing optimization, targeted Facebook/Instagram ad campaigns, and YouTube marketing to drive high-quality customers to your business."
     },
-    marketing: {
-        title: "Dominant Digital Marketing",
+    webdev: {
+        title: "Web Development",
         icon: "<img src='assets/service_marketing.png' class='modal-service-img'>",
-        desc: "Maximize your immediate ROI with our data-driven digital marketing campaigns. From hyper-targeted social media advertising on Meta to comprehensive inbound email marketing and brand management, we create custom psychological funnels designed to bring high-quality leads straight to your business."
+        desc: "Build a secure, scalable, and high-performance foundation for your business. Our expert development team uses pure, clean code and the latest technologies to create custom web applications and robust platforms tailored to your specific needs."
     },
-    ecommerce: {
-        title: "E-commerce Frameworks",
+    it: {
+        title: "Comprehensive IT Services",
         icon: "<img src='assets/service_ecommerce.png' class='modal-service-img'>",
-        desc: "We engineer robust, easily manageable online stores that offer frictionless shopping experiences. Whether you need a powerful Shopify/WooCommerce setup or a fully custom e-commerce web application with integrated global payment gateways and automated abandoned cart recovery, we have you fully covered."
+        desc: "Your trusted partner for all technical IT needs. From troubleshooting and secure system maintenance to network, hardware, and software support. We provide ongoing monitoring to minimize downtime and keep your business running smoothly."
     }
 };
 

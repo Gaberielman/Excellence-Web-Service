@@ -38,7 +38,7 @@ const initGlobalCanvas = () => {
     const PARTICLE_COLOR = () => {
         return document.documentElement.getAttribute('data-theme') === 'dark'
             ? '212, 175, 55'    // bright gold for dark background
-            : '120, 87, 10';    // deeper bronze for light background
+            : '194, 142, 14';   // elegant luxury gold for light background
     };
     const PARTICLE_OPACITY_SCALE = () => {
         return document.documentElement.getAttribute('data-theme') === 'dark' ? 1 : 0.55;
@@ -389,6 +389,50 @@ const initProjectWheel = () => {
     startAuto();
 };
 
+// ─── SCROLL PARALLAX ──────────────────────────────────────────
+const initScrollParallax = () => {
+    const parallaxElements = document.querySelectorAll('.scroll-parallax');
+    if (parallaxElements.length === 0) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        requestAnimationFrame(() => {
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-speed')) || 0;
+                // Only move vertically, and use transform3d for hardware acceleration
+                el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+            });
+        });
+    }, { passive: true });
+};
+
+// ─── 3D TILT EFFECT FOR AVATAR ────────────────────────────────
+const initHero3DTilt = () => {
+    const container = document.getElementById('tilt-avatar-container');
+    if (!container || 'ontouchstart' in window) return;
+
+    window.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) return;
+        
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+        
+        // Compute tilt angles (inverse relationship)
+        const rotateX = -(mouseY / (window.innerHeight / 2)) * 12;
+        const rotateY = (mouseX / (window.innerWidth / 2)) * 12;
+        
+        container.style.transform = `translate(-50%, -50%) perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    
+    // Reset tilt when mouse leaves
+    window.addEventListener('mouseleave', () => {
+        container.style.transform = `translate(-50%, -50%) perspective(1200px) rotateX(0deg) rotateY(0deg)`;
+    });
+};
+
 // ─── STICKY NAV SCROLL EFFECT ─────────────────────────────────
 const initNavScroll = () => {
     const nav = document.querySelector('.glass-nav');
@@ -441,7 +485,9 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements();
     initGlobalCanvas();
     initHeroParallax();
+    initHero3DTilt();
     initProjectWheel();
+    initScrollParallax();
     initNavScroll();
     initHamburger();
     initSmoothScroll();
