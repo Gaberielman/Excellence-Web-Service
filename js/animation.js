@@ -43,7 +43,7 @@ const initGlobalCanvas = () => {
     const PARTICLE_OPACITY_SCALE = () => {
         return document.documentElement.getAttribute('data-theme') === 'dark' ? 1 : 0.55;
     };
-    const CONNECTION_DIST = 140;
+    const CONNECTION_DIST = 160;
     const MOUSE_REPEL = 130;
 
     const resize = () => {
@@ -58,9 +58,9 @@ const initGlobalCanvas = () => {
         reset(random = false) {
             this.x = random ? Math.random() * W : (Math.random() > 0.5 ? 0 : W);
             this.y = random ? Math.random() * H : Math.random() * H;
-            this.vx = (Math.random() - 0.5) * 0.6;
-            this.vy = (Math.random() - 0.5) * 0.6;
-            this.size = Math.random() * 1.5 + 0.5;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.size = Math.random() * 2 + 0.5;
             this.opacity = Math.random() * 0.6 + 0.2;
         }
 
@@ -433,6 +433,53 @@ const initHero3DTilt = () => {
     });
 };
 
+// ─── CUSTOM PREMIUM CURSOR ────────────────────────────────────
+const initCustomCursor = () => {
+    const cursor = document.getElementById('cursor-follower');
+    if (!cursor || 'ontouchstart' in window) return;
+
+    let posX = 0, posY = 0;
+    let mouseX = 0, mouseY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    const animate = () => {
+        // Smooth lag follow (lerp)
+        posX += (mouseX - posX) * 0.15;
+        posY += (mouseY - posY) * 0.15;
+        
+        cursor.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(animate);
+    };
+    animate();
+
+    // Interaction states
+    const interactives = document.querySelectorAll('a, button, .service-card, .project-card, .faq-card, .theme-toggle, .primary-btn, .secondary-nav-btn');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-active'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-active'));
+    });
+};
+
+// ─── FAQ ACCORDION LOGIC ──────────────────────────────────────
+const initFAQ = () => {
+    const faqCards = document.querySelectorAll('.faq-card');
+    faqCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const isActive = card.classList.contains('active');
+            
+            // Close all other cards (one-at-a-time accordion)
+            faqCards.forEach(c => c.classList.remove('active'));
+            
+            // Toggle current if it wasn't active
+            if (!isActive) card.classList.add('active');
+        });
+    });
+};
+
 // ─── SERVICES HORIZONTAL SCROLL ──────────────────────────────
 const initServicesScroll = () => {
     const wrapper = document.getElementById('services-scroll-wrapper');
@@ -457,14 +504,13 @@ const initServicesScroll = () => {
                 const scrolledInside = scrollPos - top;
                 const progress = Math.min(Math.max(scrolledInside / scrollTotal, 0), 1);
 
-                // Calculate max horizontal distance: Exactly how much we need to slide
-                // to bring the end of the track to the right edge.
+                // Calculate max horizontal distance
                 const trackWidth = track.scrollWidth;
-                const containerWidth = wrapper.querySelector('.services-track-container').offsetWidth;
                 const viewportWidth = window.innerWidth;
                 
-                // Add a bit of 'breathing room' at the end (5%)
-                const maxTranslate = Math.max(0, trackWidth - containerWidth + (viewportWidth * 0.05));
+                // Ensure we slide far enough to see everything, 
+                // but only if the track is actually wider than the viewport
+                const maxTranslate = Math.max(0, trackWidth - (viewportWidth * 0.85));
 
                 track.style.transform = `translateX(${-progress * maxTranslate}px)`;
             });
@@ -532,6 +578,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectWheel();
     initScrollParallax();
     initServicesScroll();
+    initCustomCursor();
+    initFAQ();
     initNavScroll();
     initHamburger();
     initSmoothScroll();
