@@ -190,7 +190,7 @@ const initProjectWheel = () => {
 
     // Clone first and last for seamless loop
     const firstClone = cards[0].cloneNode(true);
-    const lastClone  = cards[N - 1].cloneNode(true);
+    const lastClone = cards[N - 1].cloneNode(true);
     firstClone.classList.add('clone');
     lastClone.classList.add('clone');
     wheel.appendChild(firstClone);
@@ -230,7 +230,7 @@ const initProjectWheel = () => {
                 card.style.zIndex = '10';
             } else {
                 card.classList.remove('active');
-                const rot   = dist * -18;
+                const rot = dist * -18;
                 const depth = Math.min(absDist * 100, 200);
                 const scale = Math.max(1 - absDist * 0.12, 0.7);
                 card.style.transform = `scale(${scale}) translateZ(-${depth}px) rotateY(${rot}deg)`;
@@ -278,7 +278,7 @@ const initProjectWheel = () => {
     const stopAuto = () => clearInterval(autoTimer);
 
     // ── Buttons ──
-    nextBtn?.addEventListener('click', () => { navigate(1);  stopAuto(); startAuto(); });
+    nextBtn?.addEventListener('click', () => { navigate(1); stopAuto(); startAuto(); });
     prevBtn?.addEventListener('click', () => { navigate(-1); stopAuto(); startAuto(); });
 
     // ── Mouse Drag (PC) ──
@@ -367,7 +367,7 @@ const initProjectWheel = () => {
         progressContainer.addEventListener('mousedown', (e) => {
             seek(e.clientX);
             const move = (me) => seek(me.clientX);
-            const up   = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+            const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
             window.addEventListener('mousemove', move);
             window.addEventListener('mouseup', up);
         });
@@ -375,7 +375,7 @@ const initProjectWheel = () => {
         progressContainer.addEventListener('touchstart', (e) => {
             seek(e.touches[0].clientX);
             const move = (me) => { e.preventDefault(); seek(me.touches[0].clientX); };
-            const end  = () => { window.removeEventListener('touchmove', move); window.removeEventListener('touchend', end); };
+            const end = () => { window.removeEventListener('touchmove', move); window.removeEventListener('touchend', end); };
             window.addEventListener('touchmove', move, { passive: false });
             window.addEventListener('touchend', end);
         });
@@ -414,23 +414,66 @@ const initHero3DTilt = () => {
     window.addEventListener('mousemove', (e) => {
         const rect = container.getBoundingClientRect();
         if (rect.top > window.innerHeight || rect.bottom < 0) return;
-        
+
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const mouseX = e.clientX - centerX;
         const mouseY = e.clientY - centerY;
-        
+
         // Compute tilt angles (inverse relationship)
         const rotateX = -(mouseY / (window.innerHeight / 2)) * 12;
         const rotateY = (mouseX / (window.innerWidth / 2)) * 12;
-        
+
         container.style.transform = `translate(-50%, -50%) perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
-    
+
     // Reset tilt when mouse leaves
     window.addEventListener('mouseleave', () => {
         container.style.transform = `translate(-50%, -50%) perspective(1200px) rotateX(0deg) rotateY(0deg)`;
     });
+};
+
+// ─── SERVICES HORIZONTAL SCROLL ──────────────────────────────
+const initServicesScroll = () => {
+    const wrapper = document.getElementById('services-scroll-wrapper');
+    const track = document.getElementById('services-track');
+    if (!wrapper || !track) return;
+
+    const updateScroll = () => {
+        if (window.innerWidth <= 768) {
+            track.style.transform = 'none';
+            return;
+        }
+
+        const rect = wrapper.getBoundingClientRect();
+        const top = rect.top + window.scrollY;
+        const height = wrapper.offsetHeight;
+        const scrollPos = window.scrollY;
+
+        // Check if we are inside the section
+        if (scrollPos >= top && scrollPos <= top + height - window.innerHeight) {
+            requestAnimationFrame(() => {
+                const scrollTotal = height - window.innerHeight;
+                const scrolledInside = scrollPos - top;
+                const progress = Math.min(Math.max(scrolledInside / scrollTotal, 0), 1);
+
+                // Calculate max horizontal distance: Exactly how much we need to slide
+                // to bring the end of the track to the right edge.
+                const trackWidth = track.scrollWidth;
+                const containerWidth = wrapper.querySelector('.services-track-container').offsetWidth;
+                const viewportWidth = window.innerWidth;
+                
+                // Add a bit of 'breathing room' at the end (5%)
+                const maxTranslate = Math.max(0, trackWidth - containerWidth + (viewportWidth * 0.05));
+
+                track.style.transform = `translateX(${-progress * maxTranslate}px)`;
+            });
+        }
+    };
+
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    window.addEventListener('resize', updateScroll, { passive: true });
+    updateScroll();
 };
 
 // ─── STICKY NAV SCROLL EFFECT ─────────────────────────────────
@@ -445,7 +488,7 @@ const initNavScroll = () => {
 // ─── MOBILE HAMBURGER ─────────────────────────────────────────
 const initHamburger = () => {
     const hamburger = document.getElementById('hamburger');
-    const navLinks   = document.getElementById('navLinks');
+    const navLinks = document.getElementById('navLinks');
     if (!hamburger || !navLinks) return;
 
     const close = () => {
@@ -488,6 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHero3DTilt();
     initProjectWheel();
     initScrollParallax();
+    initServicesScroll();
     initNavScroll();
     initHamburger();
     initSmoothScroll();

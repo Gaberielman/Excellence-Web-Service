@@ -409,10 +409,56 @@
 /* ────────────────────────────────────────────────
    SERVICES GRID
    ──────────────────────────────────────────────── */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
+/* ────────────────────────────────────────────────
+   SERVICES STICKY SCROLL
+   ──────────────────────────────────────────────── */
+.services-scroll-wrapper {
+    position: relative;
+    height: 350vh; /* Scroll length */
+}
+
+.services-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: transparent;
+}
+
+.services-track-container {
+    padding: 0 5%;
+    width: 100%;
+}
+
+.services-track {
+    display: flex;
+    gap: 40px;
+    will-change: transform;
+    padding-bottom: 20px;
+}
+
+.services-track .service-card {
+    flex: 0 0 450px;
+    max-width: 450px;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    .services-track .service-card {
+        flex: 0 0 320px;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-scroll-wrapper { height: auto !important; }
+    .services-sticky { position: relative !important; height: auto !important; }
+    .services-track { flex-direction: column; gap: 20px; padding: 0; }
+    .services-track .service-card { flex: 0 0 auto; max-width: 100%; }
 }
 
 .service-card {
@@ -1049,7 +1095,7 @@
    ──────────────────────────────────────────────── */
 .modal-overlay {
     position: fixed; inset: 0;
-    background: rgba(2, 8, 23, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -1063,8 +1109,8 @@
 .modal-overlay.open { opacity: 1; visibility: visible; }
 
 .modal-content {
-    background: #0d1b2e;
-    border: 1px solid rgba(212, 175, 55, 0.25);
+    background: var(--surface-1);
+    border: 1px solid var(--glass-border);
     max-width: 600px;
     width: 92%;
     max-height: 92vh;
@@ -1074,13 +1120,13 @@
     position: relative;
     transform: translateY(50px) scale(0.95);
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), var(--glow-md);
+    box-shadow: var(--shadow-card), var(--glow-sm);
     text-align: center;
 }
 
 .modal-content::-webkit-scrollbar { width: 6px; }
-.modal-content::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 3px; }
-.modal-content::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 3px; }
+.modal-content::-webkit-scrollbar-track { background: var(--surface-2); border-radius: 3px; }
+.modal-content::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 3px; }
 
 .modal-overlay.open .modal-content { transform: translateY(0) scale(1); }
 
@@ -1594,4 +1640,109 @@
     .fc-1 { animation-delay: 0s; }
     .fc-2 { animation-delay: -2s; width: 100%; }
     .fc-3 { animation-delay: -4s; width: 100%; }
+}
+
+/* ────────────────────────────────────────────────
+   PREMIUM CUSTOM CURSOR
+   ──────────────────────────────────────────────── */
+.cursor-follower {
+    position: fixed;
+    top: 0; left: 0;
+    width: 24px; height: 24px;
+    background: rgba(var(--particle-color), 0.15);
+    border: 1.5px solid var(--accent-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 15px rgba(var(--particle-color), 0.3);
+    transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+    will-change: transform;
+}
+
+.cursor-follower.cursor-active {
+    width: 65px; height: 65px;
+    background: rgba(var(--particle-color), 0.05);
+    border-color: var(--accent-amber);
+    box-shadow: 0 0 30px rgba(var(--particle-color), 0.2);
+}
+
+@media (max-width: 768px) {
+    .cursor-follower { display: none; }
+}
+
+/* ────────────────────────────────────────────────
+   GLASS SHIMMER EFFECT
+   ──────────────────────────────────────────────── */
+.shimmer-trigger { position: relative; overflow: hidden; }
+
+.shimmer-trigger::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    transform: rotate(25deg);
+    animation: shimmer-sweep 8s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes shimmer-sweep {
+    0%   { transform: translate(-30%, -30%) rotate(25deg); }
+    10%  { transform: translate(10%, 10%) rotate(25deg); }
+    100% { transform: translate(10%, 10%) rotate(25deg); }
+}
+
+/* ────────────────────────────────────────────────
+   FAQ ACCORDION
+   ──────────────────────────────────────────────── */
+.faq-card {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 100px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.faq-card.active {
+    max-height: 400px;
+    border-color: var(--accent-gold);
+    background: var(--surface-1);
+    box-shadow: var(--shadow-card), var(--glow-sm);
+}
+
+.faq-card p {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    margin-top: 15px;
+}
+
+.faq-card.active p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.faq-card h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-card h3::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    transition: transform 0.3s;
+}
+
+.faq-card.active h3::after {
+    transform: rotate(45deg);
+    content: '+';
 }
