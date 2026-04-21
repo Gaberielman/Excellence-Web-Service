@@ -206,6 +206,19 @@ const initProjectWheel = () => {
     };
 
     const updateWheel = (animated = true) => {
+        // Bypass 3D transformations on mobile — display as standard vertical stack
+        if (window.innerWidth <= 768) {
+            if (wheel) wheel.style.transform = '';
+            if (allCards) {
+                allCards.forEach(card => {
+                    card.style.transform = '';
+                    card.style.zIndex = '';
+                    card.classList.remove('active');
+                });
+            }
+            return;
+        }
+
         if (!animated) {
             wheel.classList.add('no-transition');
             allCards.forEach(c => { c.style.transition = 'none'; });
@@ -433,94 +446,52 @@ const initHero3DTilt = () => {
     });
 };
 
-// ─── CUSTOM PREMIUM CURSOR ────────────────────────────────────
-const initCustomCursor = () => {
-    const cursor = document.getElementById('cursor-follower');
-    if (!cursor || 'ontouchstart' in window) return;
+// ────────────────────────────────────────────────
+// SERVICES ACCORDION
+// ────────────────────────────────────────────────
+function initServicesAccordion() {
+    const items = document.querySelectorAll('.service-item');
+    if (items.length === 0) return;
 
-    let posX = 0, posY = 0;
-    let mouseX = 0, mouseY = 0;
+    // Optional: Auto-open first item
+    // items[0].classList.add('active');
+}
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+window.toggleService = function(element) {
+    const items = document.querySelectorAll('.service-item');
+    const isActive = element.classList.contains('active');
+
+    // Close all other items
+    items.forEach(item => {
+        item.classList.remove('active');
     });
 
-    const animate = () => {
-        // Smooth lag follow (lerp)
-        posX += (mouseX - posX) * 0.15;
-        posY += (mouseY - posY) * 0.15;
-        
-        cursor.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
-        requestAnimationFrame(animate);
-    };
-    animate();
-
-    // Interaction states
-    const interactives = document.querySelectorAll('a, button, .service-card, .project-card, .faq-card, .theme-toggle, .primary-btn, .secondary-nav-btn');
-    interactives.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-active'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-active'));
-    });
+    // Toggle clicked item
+    if (!isActive) {
+        element.classList.add('active');
+    }
 };
 
-// ─── FAQ ACCORDION LOGIC ──────────────────────────────────────
-const initFAQ = () => {
-    const faqCards = document.querySelectorAll('.faq-card');
-    faqCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const isActive = card.classList.contains('active');
+// ────────────────────────────────────────────────
+// FAQ ACCORDION
+// ────────────────────────────────────────────────
+function initFAQAccordion() {
+    const questions = document.querySelectorAll('.faq-card');
+    
+    questions.forEach(question => {
+        question.addEventListener('click', () => {
+            const isActive = question.classList.contains('active');
             
-            // Close all other cards (one-at-a-time accordion)
-            faqCards.forEach(c => c.classList.remove('active'));
+            // Close all
+            questions.forEach(q => q.classList.remove('active'));
             
-            // Toggle current if it wasn't active
-            if (!isActive) card.classList.add('active');
+            // Open clicked if it wasn't active
+            if (!isActive) {
+                question.classList.add('active');
+            }
         });
     });
-};
-
-// ─── SERVICES HORIZONTAL SCROLL ──────────────────────────────
-const initServicesScroll = () => {
-    const wrapper = document.getElementById('services-scroll-wrapper');
-    const track = document.getElementById('services-track');
-    if (!wrapper || !track) return;
-
-    const updateScroll = () => {
-        if (window.innerWidth <= 768) {
-            track.style.transform = 'none';
-            return;
-        }
-
-        const rect = wrapper.getBoundingClientRect();
-        const top = rect.top + window.scrollY;
-        const height = wrapper.offsetHeight;
-        const scrollPos = window.scrollY;
-
-        // Check if we are inside the section
-        if (scrollPos >= top && scrollPos <= top + height - window.innerHeight) {
-            requestAnimationFrame(() => {
-                const scrollTotal = height - window.innerHeight;
-                const scrolledInside = scrollPos - top;
-                const progress = Math.min(Math.max(scrolledInside / scrollTotal, 0), 1);
-
-                // Calculate max horizontal distance
-                const trackWidth = track.scrollWidth;
-                const viewportWidth = window.innerWidth;
-                
-                // Ensure we slide far enough to see everything, 
-                // but only if the track is actually wider than the viewport
-                const maxTranslate = Math.max(0, trackWidth - (viewportWidth * 0.85));
-
-                track.style.transform = `translateX(${-progress * maxTranslate}px)`;
-            });
-        }
-    };
-
-    window.addEventListener('scroll', updateScroll, { passive: true });
-    window.addEventListener('resize', updateScroll, { passive: true });
-    updateScroll();
-};
+}
 
 // ─── STICKY NAV SCROLL EFFECT ─────────────────────────────────
 const initNavScroll = () => {
@@ -577,9 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initHero3DTilt();
     initProjectWheel();
     initScrollParallax();
-    initServicesScroll();
-    initCustomCursor();
-    initFAQ();
+    initServicesAccordion();
+    initFAQAccordion();
     initNavScroll();
     initHamburger();
     initSmoothScroll();
